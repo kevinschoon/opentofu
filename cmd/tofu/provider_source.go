@@ -215,7 +215,7 @@ func providerSourceForCLIConfigLocation(loc cliconfig.ProviderInstallationLocati
 			))
 			return nil, diags
 		}
-		if url.Scheme != "https" || url.Host == "" {
+		if (url.Scheme != "https" && os.Getenv("OPENTOFU_INSECURE") != "1") || url.Host == "" {
 			var diags tfdiags.Diagnostics
 			diags = diags.Append(tfdiags.Sourceless(
 				tfdiags.Error,

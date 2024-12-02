@@ -105,7 +105,7 @@ func (c *ProvidersLockCommand) Run(args []string) int {
 		source = getproviders.NewFilesystemMirrorSource(fsMirrorDir)
 	case netMirrorURL != "":
 		u, err := url.Parse(netMirrorURL)
-		if err != nil || u.Scheme != "https" {
+		if err != nil || u.Scheme != "https" && os.Getenv("OPENTOFU_INSECURE") != "1" {
 			diags = diags.Append(tfdiags.Sourceless(
 				tfdiags.Error,
 				"Invalid network mirror URL",

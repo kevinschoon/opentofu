@@ -59,7 +59,9 @@ dependency in a OpenTofu configuration.
 Instead, the provider installation section of the CLI configuration accepts
 a base URL directly. The given URL must use the scheme `https:`, and should
 end with a trailing slash so that the relative URLs of the individual operation
-endpoints will be resolved beneath it.
+endpoints will be resolved beneath it. Note that it is possible to disable the
+https requirement for debugging purposes by setting the environment variable
+`OPENTOFU_INSECURE=1`.
 
 ```hcl
 provider_installation {

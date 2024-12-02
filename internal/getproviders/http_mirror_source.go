@@ -14,6 +14,7 @@ import (
 	"mime"
 	"net/http"
 	"net/url"
+	"os"
 	"path"
 	"strings"
 
@@ -61,7 +62,7 @@ func NewHTTPMirrorSource(baseURL *url.URL, creds svcauth.CredentialsSource) *HTT
 }
 
 func newHTTPMirrorSourceWithHTTPClient(baseURL *url.URL, creds svcauth.CredentialsSource, httpClient *http.Client) *HTTPMirrorSource {
-	if baseURL.Scheme != "https" {
+	if baseURL.Scheme != "https" && os.Getenv("OPENTOFU_INSECURE") != "1" {
 		panic("non-https URL for HTTP mirror")
 	}
 
